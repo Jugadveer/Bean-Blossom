@@ -1,0 +1,242 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+.team {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-top: 100px;
+}
+
+.head {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 60px;
+  color: #333;
+}
+
+.person {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 250px;
+  margin-bottom: 80px;
+}
+
+.container {
+  height: auto;
+  width: auto;
+  cursor: pointer;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.person img {
+  width: 240px;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #E85A4F;;
+  transition: transform 250ms;
+  
+}
+
+.container:hover img {
+  transform: scale(1.05);
+}
+
+.container-inner {
+  position: relative;
+  top: 0px;
+}
+
+.person h1 {
+  color: #E85A4F;;
+  margin-top: 10px;
+  font-size: 1.4rem;
+}
+
+.divider {
+  display: none;
+}
+
+* {
+  font-family: Nunito, sans-serif;
+}
+
+/* Previous styles below are preserved */
+
+.responsive-container-block {
+  min-height: 75px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: flex-start;
+}
+
+.text-blk {
+  padding: 10px;
+  line-height: 25px;
+}
+
+.responsive-container-block.bigContainer {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 50px;
+}
+
+.mainImg {
+  color: black;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.text-blk.headingText {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 30px;
+  color:  #E85A4F;;
+  margin-bottom: 5px;
+}
+
+.allText {
+  width: 40%;
+}
+
+.text-blk.subHeadingText {
+  color: grey;
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.text-blk.description {
+  font-size: 18px;
+  line-height: 26px;
+  color: rgb(102, 102, 102);
+  font-weight: 400;
+  margin-bottom: 50px;
+}
+
+.explore {
+  font-size: 16px;
+  line-height: 28px;
+  color: rgb(102, 102, 102);
+  border: solid;
+  transition-duration: 0.5s;
+  background-color: white;
+  padding: 8px 40px;
+  cursor: pointer;
+}
+
+.explore:hover {
+  background-color:  #E85A4F;
+  color: white;
+  transition-duration: 0.3s;
+}
+
+.responsive-container-block.Container {
+  margin: 80px auto 50px auto;
+  justify-content: center;
+  align-items: center;
+  max-width: 1320px;
+  padding: 10px;
+}
+
+.responsive-container-block.Container.bottomContainer {
+  flex-direction: row-reverse;
+}
+
+.allText.aboveText {
+  margin-left: 40px;
+}
+
+.allText.bottomText {
+  margin-right: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-right: 15px;
+}
+
+.purpleBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 430px;
+  background-color: rgb(176, 98, 255);
+  padding: 20px;
+  border-radius: 10px;
+  position: absolute;
+  bottom: -35px;
+  left: -8%;
+}
+
+.purpleText {
+  font-size: 18px;
+  line-height: 26px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.ultimateImg {
+  width: 50%;
+  position: relative;
+}
+</style>
+
+<section>
+  <div class="responsive-container-block bigContainer">
+    <div class="responsive-container-block Container bottomContainer">
+      <div class="ultimateImg">
+        <img class="mainImg" src="{% static 'assets/imagecopy.png' %}">
+      </div>
+      <div class="allText bottomText">
+        <p class="text-blk headingText">About Us</p>
+        <p class="text-blk subHeadingText">Unwind with every sip</p>
+        <p class="text-blk description">
+          Welcome to Beans and Blossom, your destination for exceptional coffee and warm connections.
+          Rooted in the heart of our community, we blend rich flavors, creative ambiance, and shared moments to craft unique experiences. 
+          With every cup, we honor sustainability, quality, and care. Step in, unwind, and become a cherished part of our blossoming story.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="part2">
+  <h1 class="head">Meet the <span style="color: #E85A4F;">Team</span></h1>
+  <div class="team">
+    <div class="person">
+      <div class="container">
+        <div class="container-inner">
+          <img src="{% static 'assets/WhatsApp Image 2025-04-12 at 18.23.07_b0ca225e.jpg' %}" alt="Prachi">
+        </div>
+      </div>
+      <h1>Prachi</h1>
+    </div>
+    <div class="person">
+      <div class="container">
+        <div class="container-inner">
+          <img src="{% static 'assets/WhatsApp Image 2025-04-12 at 18.22.56_e664ce7d.jpg' %}" alt="Kanan">
+        </div>
+      </div>
+      <h1>Kanan</h1>
+    </div>
+    <div class="person">
+      <div class="container">
+        <div class="container-inner">
+          <img src="{% static 'assets/WhatsApp Image 2025-04-12 at 18.22.41_0b7f82d0.jpg' %}" alt="Prabhleen">
+        </div>
+      </div>
+      <h1>Prabhleen</h1>
+    </div>
+  </div>
+</section>
+{% endblock %}
