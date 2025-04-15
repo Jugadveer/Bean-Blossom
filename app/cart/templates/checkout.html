@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 
 <!-- Header -->
 <header class="py-5">
@@ -35,25 +37,20 @@
                   {% endif %}
                 </span>
               </div>
-             <small class="text-muted">
-  Quantity:
-  {% for key, value in quantities.items %}
-    {% if key == product.id|slugify %}
-      {{ value }}
-    {% endif %}
-  {% endfor %}
-</small>
-
+              <small class="text-muted">
+                Quantity:
+                {% for key, value in quantities.items %}
+                  {% if key == product.id|slugify %}
+                    {{ value }}
+                  {% endif %}
+                {% endfor %}
+              </small>
             </div>
             {% endfor %}
           </div>
           <div class="d-flex justify-content-between align-items-center mt-3">
             <h5 class="text-end">Total: ₹{{ totals }}</h5>
-            <a
-              href="{% url 'cart_summary' %}"
-              class="btn btn-outline-secondary btn-sm"
-              >Update Items</a
-            >
+            <a href="{% url 'cart_summary' %}" class="btn btn-outline-secondary btn-sm">Update Items</a>
           </div>
         </div>
       </div>
@@ -67,40 +64,27 @@
         </div>
         <div class="card-body d-flex flex-column justify-content-between">
           <div>
-          {% if profile.phone and profile.address1 and profile.city and profile.state and profile.zipcode and profile.country %}
-  <p><strong>Phone:</strong> {{ profile.phone }}</p>
-  <p><strong>Address 1:</strong> {{ profile.address1 }}</p>
-  {% if profile.address2 %}
-    <p><strong>Address 2:</strong> {{ profile.address2 }}</p>
-  {% endif %}
-  <p><strong>City:</strong> {{ profile.city }}</p>
-  <p><strong>State:</strong> {{ profile.state }}</p>
-  <p><strong>Zip Code:</strong> {{ profile.zipcode }}</p>
-  <p><strong>Country:</strong> {{ profile.country }}</p>
-{% else %}
-  <p class="text-warning">
-    ⚠️ Your shipping details are incomplete. Please update your address information.
-  </p>
-{% endif %}
-
+            {% if profile.phone and profile.address1 and profile.city and profile.state and profile.zipcode and profile.country %}
+              <p><strong>Phone:</strong> {{ profile.phone }}</p>
+              <p><strong>Address 1:</strong> {{ profile.address1 }}</p>
+              {% if profile.address2 %}
+                <p><strong>Address 2:</strong> {{ profile.address2 }}</p>
+              {% endif %}
+              <p><strong>City:</strong> {{ profile.city }}</p>
+              <p><strong>State:</strong> {{ profile.state }}</p>
+              <p><strong>Zip Code:</strong> {{ profile.zipcode }}</p>
+              <p><strong>Country:</strong> {{ profile.country }}</p>
+            {% else %}
+              <p class="text-warning">
+                ⚠️ Your shipping details are incomplete. Please update your address information.
+              </p>
+            {% endif %}
           </div>
           <div>
             {% if profile.phone and profile.address1 %}
-            <a
-              href="#"
-              data-bs-toggle="modal"
-              data-bs-target="#userInfoModal"
-              class="btn btn-outline-secondary btn-sm mt-2"
-              >Edit Address</a
-            >
+              <a href="#" data-bs-toggle="modal" data-bs-target="#userInfoModal" class="btn btn-outline-secondary btn-sm mt-2">Edit Address</a>
             {% else %}
-            <a
-              href="#"
-              data-bs-toggle="modal"
-              data-bs-target="#userInfoModal"
-              class="btn btn-outline-primary btn-sm mt-2"
-              >Update Address Info</a
-            >
+              <a href="#" data-bs-toggle="modal" data-bs-target="#userInfoModal" class="btn btn-outline-primary btn-sm mt-2">Update Address Info</a>
             {% endif %}
           </div>
         </div>
@@ -109,47 +93,50 @@
   </div>
 
   <!-- Proceed to Payment -->
- <div class="text-center mt-4">
-  <button
-    id="rzp-button"
-    class="btn btn-success px-5 py-3 rounded-pill shadow-lg"
-    style="font-size: 1.1rem"
-  >
-    Proceed to Payment
-  </button>
-  
-</div>
-
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
- <script>
-  var options = {
-    key: "{{ razorpay_key_id }}",
-    amount: "{{ amount_paise }}", 
-    currency: "INR",
-    name: "Your Store",
-    description: "Order Payment",
-    order_id: "{{ order_id }}",
-    handler: function (response) {
-      alert("Payment successful! Payment ID: " + response.razorpay_payment_id);
-    },
-    prefill: {
-      name: "{{ user_name }}",
-      email: "{{ user_email }}",
-      contact: "{{ user_contact }}"
-    },
-    theme: {
-      color: "#28a745"
-    }
-  };
-
-  var rzp1 = new Razorpay(options);
-  document.getElementById('rzp-button').onclick = function (e) {
-    rzp1.open();
-    e.preventDefault();
-  }
-</script>
-
-
-    {% endblock %}
+  <div class="text-center mt-4">
+    <button
+      id="rzp-button"
+      class="btn btn-success px-5 py-3 rounded-pill shadow-lg"
+      style="font-size: 1.1rem"
+      onclick="showConfirmationModal()"
+    >
+      Confirm Order
+    </button>
   </div>
-</div>
+
+  <!-- Razorpay script if needed -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <!-- Order Confirmation Modal -->
+  <div
+    class="modal fade"
+    id="orderConfirmationModal"
+    tabindex="-1"
+    aria-labelledby="orderConfirmationModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="orderConfirmationModalLabel">Order Confirmed ✅</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p class="mb-0">Thank you! Your order has been successfully placed.</p>
+        </div>
+        <div class="modal-footer border-0 justify-content-center">
+          <button type="button" class="btn btn-success px-4 rounded-pill" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Script -->
+  <script>
+    function showConfirmationModal() {
+      var myModal = new bootstrap.Modal(document.getElementById('orderConfirmationModal'));
+      myModal.show();
+    }
+  </script>
+
+{% endblock %}

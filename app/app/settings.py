@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-&+x$az53f2+jm+=o)6-5zi(ver#$5@%prde1i3v&x72=fr2*61
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bean-blossom.onrender.com']
+ALLOWED_HOSTS = []
 
 #API KEYS
 RAZORPAY_KEY_ID = config('RAZORPAY_KEY_ID', default='rzp_test_70WJE5QjTg0lx9')
